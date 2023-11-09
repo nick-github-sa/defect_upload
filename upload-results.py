@@ -9,7 +9,7 @@ import urllib3
 urllib3.disable_warnings()
 
 def upload_results(host, api_key, scanner, result_file, engagement_id, lead_id, environment, verify=False): # set verify to False if ssl cert is self-signed
-    API_URL = "https://"+host+"/api/v2"
+    API_URL = "http://"+host+"/api/v2"
     IMPORT_SCAN_URL = API_URL+"/import-scan/"
     AUTH_TOKEN = "Token "+api_key
 
@@ -47,7 +47,7 @@ def upload_results(host, api_key, scanner, result_file, engagement_id, lead_id, 
     files['file'] = open(result_file)
 
     # Make a request to API
-    response = requests.post(IMPORT_SCAN_URL, headers=headers, files=files, data=json, verify=verify)
+    response = requests.post(IMPORT_SCAN_URL, headers=headers, files=files, data=json, verify=False)
     # Uncomment these lines to debug
     # print(response.request.body)
     # print(response.request.headers)
